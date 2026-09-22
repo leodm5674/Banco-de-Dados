@@ -1,0 +1,95 @@
+	CREATE DATABASE agenda_academica;
+
+	\c agenda_academica
+
+	CREATE TABLE aluno(
+	id SERIAL PRIMARY KEY NOT NULL,	 
+	nome VARCHAR(80) NOT NULL,
+	email VARCHAR(120) NOT NULL CHECK (email LIKE '%@%'), 
+	celular CHAR(16) NOT NULL,
+	nascimento DATE NOT NULL DEFAULT now()
+	
+	);
+	
+	CREATE TABLE professor(
+	id SERIAL PRIMARY KEY NOT NULL,	 
+	nome VARCHAR(80) NOT NULL,
+	email VARCHAR(120) NOT NULL CHECK (email LIKE '%@%'), 
+	cpf CHAR(14) NOT NULL UNIQUE
+	);
+	
+	CREATE TABLE atividade(
+	id SERIAL PRIMARY KEY NOT NULL,	 
+	nomeatividade VARCHAR(80) NOT NULL,
+	professor_id INT NULL,
+	FOREIGN KEY (professor_id) REFERENCES professor(id)
+	);
+	
+	CREATE TABLE inscricao_atividade (
+
+	id SERIAL PRIMARY KEY NOT NULL,	
+	id_aluno INT NULL,
+	id_atividade INT NULL,
+	FOREIGN KEY (id_aluno) REFERENCES aluno(id),
+	FOREIGN KEY (id_atividade) REFERENCES atividade(id)
+	);
+	
+	
+INSERT INTO aluno (nome, email, celular, nascimento) VALUES ('Amanda de Almeida', 'amanda.almeida@email.com', '(45) 99999-1111', '15/03/2001');
+INSERT INTO aluno (nome, email, celular, nascimento) VALUES ('Bruno Castro', 'bruno.castro@email.com', '(45) 99999-2222', '22/07/1999');
+INSERT INTO aluno (nome, email, celular, nascimento) VALUES ('Camila Rodrigues', 'camila.rodrigues@email.com', '(45) 99999-3333', '05/11/2002');
+INSERT INTO aluno (nome, email, celular, nascimento) VALUES ('Daniel Santos', 'daniel.santos@email.com', '(45) 99999-4444', '30/01/2000');
+INSERT INTO aluno (nome, email, celular, nascimento) VALUES ('Cristiano Ronaldo', 'robazao77@email.com', '(45) 99999-5555', '18/09/2003');
+INSERT INTO aluno (nome, email, celular, nascimento) VALUES ('Messi', 'messi@email.com', '(45) 99999-6666', '12/04/1998');
+INSERT INTO aluno (nome, email, celular, nascimento) VALUES ('Gabriela Souza', 'gabriela.souza@email.com', '(45) 99999-7777', '25/12/2001');
+INSERT INTO aluno (nome, email, celular, nascimento) VALUES ('Henrique Pereira', 'henrique.pereira@email.com', '(45) 99999-8888', '08/06/2000');
+INSERT INTO aluno (nome, email, celular, nascimento) VALUES ('Isabela Costa', 'isabela.costa@email.com', '(45) 99999-9999', '14/02/2002');
+INSERT INTO aluno (nome, email, celular, nascimento) VALUES ('Lucas Ferreira', 'lucas.ferreira@email.com', '(45) 99999-0000', '10/08/2006');
+
+
+INSERT INTO professor (nome, email, cpf) VALUES ('Julio Royer','julio.royer@email.com','10/01/1949');
+
+INSERT INTO professor (nome, email, cpf) VALUES ('Ana Paula','ana.paula@email.com','25/05/1978');
+
+INSERT INTO professor (nome, email, cpf) VALUES ('Alcione Bennachio','alcione.bennachio@email.com','12/03/1981');
+
+
+INSERT INTO atividade (nomeatividade, professor_id) VALUES ('Modularização','1');
+INSERT INTO atividade (nomeatividade, professor_id) VALUES ('Operadores Lógicos','2');
+INSERT INTO atividade (nomeatividade, professor_id) VALUES ('Comando do SQL','3');
+INSERT INTO atividade (nomeatividade, professor_id) VALUES ('Logisim','1');
+INSERT INTO atividade (nomeatividade, professor_id) VALUES ('Conjuntos','2');
+
+
+
+INSERT INTO inscricao_atividade(id_aluno,id_atividade) VALUES ('1','1');
+INSERT INTO inscricao_atividade(id_aluno,id_atividade) VALUES ('2','1');
+INSERT INTO inscricao_atividade(id_aluno,id_atividade) VALUES ('3','1');
+INSERT INTO inscricao_atividade(id_aluno,id_atividade) VALUES ('4','1');
+INSERT INTO inscricao_atividade(id_aluno,id_atividade) VALUES ('5','1');
+INSERT INTO inscricao_atividade(id_aluno,id_atividade) VALUES ('6','2');
+INSERT INTO inscricao_atividade(id_aluno,id_atividade) VALUES ('7','2');
+INSERT INTO inscricao_atividade(id_aluno,id_atividade) VALUES ('8','2');
+INSERT INTO inscricao_atividade(id_aluno,id_atividade) VALUES ('9','2');
+INSERT INTO inscricao_atividade(id_aluno,id_atividade) VALUES ('10','2');
+INSERT INTO inscricao_atividade(id_aluno,id_atividade) VALUES ('1','3');
+INSERT INTO inscricao_atividade(id_aluno,id_atividade) VALUES ('2','3');
+INSERT INTO inscricao_atividade(id_aluno,id_atividade) VALUES ('3','3');
+INSERT INTO inscricao_atividade(id_aluno,id_atividade) VALUES ('4','3');
+INSERT INTO inscricao_atividade(id_aluno,id_atividade) VALUES ('5','3');
+INSERT INTO inscricao_atividade(id_aluno,id_atividade) VALUES ('7','4');
+INSERT INTO inscricao_atividade(id_aluno,id_atividade) VALUES ('8','4');
+INSERT INTO inscricao_atividade(id_aluno,id_atividade) VALUES ('9','4');
+INSERT INTO inscricao_atividade(id_aluno,id_atividade) VALUES ('2','4');
+INSERT INTO inscricao_atividade(id_aluno,id_atividade) VALUES ('10','4');
+INSERT INTO inscricao_atividade(id_aluno,id_atividade) VALUES ('1','5');
+INSERT INTO inscricao_atividade(id_aluno,id_atividade) VALUES ('5','5');
+INSERT INTO inscricao_atividade(id_aluno,id_atividade) VALUES ('6','5');
+INSERT INTO inscricao_atividade(id_aluno,id_atividade) VALUES ('9','5');
+INSERT INTO inscricao_atividade(id_aluno,id_atividade) VALUES ('10','5');
+
+UPDATE atividade SET nomeatividade = 'Alunos.c' WHERE id = 1;
+
+UPDATE professor SET email = 'anapaula@email.com' WHERE id = 2;
+
+INSERT INTO professor (nome, email, cpf) VALUES ('Felipe Chat','felipechat@email.com','23/07/1975');
